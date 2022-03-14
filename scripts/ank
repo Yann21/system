@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+if [ -z $LAST_DIR ]; then
+    export LAST_DIR=$(pwd)
+    echo Saved directory: $LAST_DIR
+else
+    echo You\'re back!
+    cd $LAST_DIR
+    unset LAST_DIR
+fi

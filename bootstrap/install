@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# TODO: ingest parameter
+#INSTALLATION_TYPE=$1 # Work or home
+
+# Install dotfiles
+if [ ! -d "$HOME/.dotfiles" ]; then
+    cp -r dotfiles "$HOME/.dotfiles"
+    make -C "$HOME/.dotfiles" work # Choose between work or home
+fi
+
+# Add ~/.local/bin to path
+if [ -f /etc/profile.d/custom-path.sh ]; then
+    echo "PATH=\$PATH:\$HOME/.local/bin" | sudo tee /etc/profile.d/custom-path.sh &> /dev/null
+    echo "PATH=\$PATH:\$HOME/system/scripts" | sudo tee /etc/profile.d/custom-path.sh &> /dev/null
+fi
+
+# Install exa
+if ! command -v exa &> /dev/null; then
+    EXA_TMP=$(mktemp)
+    EXA_VERSION=0.10.1
+    wget "https://github.com/ogham/exa/releases/download/v$EXA_VERSION/exa-linux-x86_64-$EXA_VERSION.zip" -O "$EXA_TMP"
+    unzip "$EXA_TMP" -d "$HOME"
+    install "$HOME/exa-linux-x86_64" "$HOME/.local/bin/exa"
+fi
+
+# Prepare vim
+if [ ! -d "$HOME/.vim/plugged" ]; then
+    mkdir -p "$HOME/.vim/{backup,autoload,swap}"
+    firefox https://wakatime.com/api-key
+    vim -E +"source $HOME/.vim/vimrc" +"PlugInstall" +qa
+    "$HOME/.vim/plugged/YouCompleteMe/install.py" --all
+fi
+
+#chsh --shell /bin/zsh
+# Set terminal
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    ./res/oh_my_zsh_plugins.sh
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+fi
+
+# Install emacs
+if [ ! -d "$HOME/.emacs.d" ]; then
+    git clone --depth 1 https://github.com/hlissner/doom-emacs "$HOME/.emacs.d"
+    "$HOME/.emacs.d/bin/doom" install
+fi
+
+
+# Installing monofont for Emacs
+if ! fc-list | grep -q "Ubuntu Mono Nerd"; then
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip
+    unzip UbuntuMono.zip -d "$HOME/.local/share/fonts"
+    fc-cache -f -v
+fi
+
+# Installing cpg and mvg
+if ! command -v cpg &> /dev/null; then
+    DIR=$(mktemp -d)
+    curl https://raw.githubusercontent.com/jarun/advcpmv/master/install.sh --create-dirs -o "$DIR/install.sh"
+    (cd "$DIR" && sh install.sh)
+    install "$DIR/advcp" "$HOME/.local/bin/cpg"
+    install "$DIR/advmv" "$HOME/.local/bin/mvg"
+fi
+
+# Installing gitwatch
+if ! command -v gitwatch &> /dev/null; then
+    mkdir -p "$HOME/Downloads/Builds"
+    git clone https://github.com/gitwatch/gitwatch.git "$HOME/Downloads/Builds/gitwatch"
+    install -b "$HOME/Downloads/Builds/gitwatch/gitwatch.sh" "$HOME/.local/bin/gitwatch"
+fi
+
+# Installing v
+if ! command -v v &> /dev/null; then
+    DIR=$(mktemp -d)
+    git clone git@github.com:rupa/v.git "$DIR"
+    install "$DIR/v" "$HOME/.local/bin"
+    mkdir -p "$HOME/.local/share/man/man1"
+    cp "$DIR/v.1" "$HOME/.local/share/man/man1"
+    mandb
+fi

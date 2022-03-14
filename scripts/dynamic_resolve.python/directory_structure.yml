@@ -1,0 +1,14 @@
+home:
+  - yann:
+    - Documents:
+      - Media:
+        - screenshots
+        - calibre
+      - Zotero
+
+    - system:
+      - bin
+      - etc:
+        - directory_structure
+
+    - ".notes"

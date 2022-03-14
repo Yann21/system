@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Version=0.0
+Name=SceneBuilder
+Comment=No comment
+Exec=/usr/bin/scenebuilder
+Categories=Development;IDE;

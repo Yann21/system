@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=ClassVisualizer
+Comment=No comment
+Exec=/home/yann/Downloads/class-visualizer/clsvis.sh
+Categories=Development;IDE;

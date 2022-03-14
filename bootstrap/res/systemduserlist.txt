@@ -1,0 +1,12 @@
+dropbox.service
+rclone-gphotos.service
+rclone.service
+ssr.service
+xdg-user-dirs-update.service
+dirmngr.socket
+gpg-agent-browser.socket
+gpg-agent-extra.socket
+gpg-agent-ssh.socket
+gpg-agent.socket
+p11-kit-server.socket
+pulseaudio.socket

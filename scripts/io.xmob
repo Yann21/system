@@ -1,0 +1,48 @@
+#!/usr/bin/bash
+
+# Script takes the partition and the operation as its parameters
+# xmob_io sda r|w
+if [ $# != 2 ]; then
+    echo Wrong Parameters
+    exit
+fi
+
+# Select partition
+ROW=$(iostat -m | awk -v part=$1 '{
+    if ($1 == part) print $0
+}')
+
+# iostat columns (man 1)
+#tps    Indicate  the number of transfers per second that were issued to the device.
+     #A transfer is an I/O request to the device. Multiple logical requests can be
+     #combined  into a single I/O request to the device. A transfer is of indeter‐
+     #minate size.
+
+#Blk_read/s (kB_read/s, MB_read/s)
+     #Indicate the amount of data read from the device expressed in  a  number  of
+     #blocks  (kilobytes,  megabytes) per second. Blocks are equivalent to sectors
+     #and therefore have a size of 512 bytes.
+
+#Blk_wrtn/s (kB_wrtn/s, MB_wrtn/s)
+     #Indicate the amount of data written to the device expressed in a  number  of
+     #blocks (kilobytes, megabytes) per second.
+
+#Blk_dscd/s (kB_dscd/s, MB_dscd/s)
+     #Indicate  the  amount of data discarded for the device expressed in a number
+     #of blocks (kilobytes, megabytes) per second.
+
+#Blk_read (kB_read, MB_read)
+     #The total number of blocks (kilobytes, megabytes) read.
+
+#Blk_wrtn (kB_wrtn, MB_wrtn)
+     #The total number of blocks (kilobytes, megabytes) written.
+
+#Blk_dscd (kB_dscd, MB_dscd)
+     #The total number of blocks (kilobytes, megabytes) discarded.
+
+READS=$( echo $ROW | awk '{print $3}')
+WRITES=$(echo $ROW | awk '{print $4}')
+DISCS=$( echo $ROW | awk '{print $5}')
+
+FSTRING=$2
+echo $FSTRING | sed -e "s/<r>/${READS}/" -e "s/<w>/${WRITES}/"

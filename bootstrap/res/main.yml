@@ -1,0 +1,104 @@
+---
+  #roles:
+  #- kewlfft.aur
+
+- name: Run the equivalent of pacman -Syu.
+  become: yes
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install / synchronize reference files.
+  become: yes
+  file:
+    src: "{{ item }}"
+    dest: "/etc/{{ item | basename }}"
+    state: hard
+    force: yes
+  loop: "{{lookup('fileglob', 'ref/*.txt', wantlist=True)}}"
+
+- name: Install packages with pacman.
+  become: yes
+  pacman:
+    name: "{{ item }}"
+    state: present
+    extra_args: --overwrite "*"
+
+
+- name: Check if yay executable is already in path.
+  shell: "which yay"
+  register: yay_bool
+  ignore_errors: true
+
+- name: Install yay.
+  when: yay_bool.rc != 0
+  block:
+  - name: Create build directory.
+    become: yes
+    file:
+      path: /tmp/yay-build
+      state: directory
+      owner: "{{ lookup('env', 'USER') }}"
+      group: "{{ lookup('env', 'USER') }}"
+  - name: Clone yay source repo.
+    git:
+      repo: https://aur.archlinux.org/yay-git.git
+      dest: /tmp/yay-build
+
+  - name: Make and install yay.
+    shell: makepkg -si --noconfirm
+    args:
+      chdir: /tmp/yay-build
+
+  - name: Remove build directory.
+    file:
+      path: /tmp/yay-build
+      state: absent
+
+
+- name: Install AUR packages.
+  block:
+  - name: Create install user.
+    become: yes
+    user:
+      name: aur_builder
+      group: wheel
+
+  - name: Change sudoers.
+    become: yes
+    lineinfile:
+      path: /etc/sudoers.d/11-install-aur_builder
+      line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+      create: yes
+      validate: "visudo -cf %s"
+
+  - name: Install packages
+    become: yes
+    become_user: aur_builder
+    aur:
+      name: "{{ item }}"
+      use: yay
+      extra_args: --overwrite "*"
+    loop: "{{ lookup('file', 'ref/pkglistaur.txt').splitlines()}}"
+
+  - name: Remove user.
+    become: yes
+    user:
+      name: aur_builder
+      state: absent
+      remove: yes
+
+
+- name: Turn on systemd services.
+  systemd:
+    name: "{{ item }}"
+    state: started
+    scope: system # Default
+  loop: "{{ lookup('file', 'ref/systemdlist.txt').splitlines()}}"
+
+- name: Turn on systemd user services.
+  systemd:
+    name: "{{ item }}"
+    state: started
+    scope: user
+  loop: "{{ lookup('file', 'ref/systemduserlist.txt').splitlines()}}"

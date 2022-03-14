@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+GPU=$(nvidia-settings -q=GPUUtilization -t | sed -r "s/^.{9}//" | sed -r "s/,.*//")
+echo "$GPU%"

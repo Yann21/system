@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# Script used to correct common command line mistakes
+# that are used by the autocorrect and strengthen the bad habit.
+
+
+usage() {
+  cat << EOF # remove the space between << and EOF, this is due to web plugin issue
+Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-f] -p param_value arg1 [arg2...]
+
+Script description here.
+
+Available options:
+
+-h, --help      Print this help and exit
+-v, --verbose   Print script debug info
+-f, --flag      Some flag description
+-p, --param     Some param description
+EOF
+  exit
+}
+
+parse_params() {
+  # default values of variables set from params
+  flag=0
+  param=''
+
+  while :; do
+    case "${1-}" in
+    -h | --help) usage ;;
+    -v | --verbose) set -x ;;
+    #-f | --flag) flag=1 ;; # example flag
+    #-p | --param) # example named parameter
+      #param="${2-}"
+      #shift
+      #;;
+    -?*) die "Unknown option: $1" ;;
+    *) break ;;
+    esac
+    shift
+  done
+
+  args=("$@")
+
+  # check required params and arguments
+  [[ -z "${param-}" ]] && die "Missing required parameter: param"
+  [[ ${#args[@]} -eq 0 ]] && die "Missing script arguments"
+
+  return 0
+}
+
+#parse_params "$@"
+
+
+
+FILE=$1
+
+sed -i -e '/pip remove/d' \
+    -e '/apt uninstall/d' \
+    -e '/pip install sklearn/d' "$FILE"

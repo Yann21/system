@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+RAW=$(gpustat | grep -Eo '[0-9]+ /  [0-9]+')
+echo $RAW | awk '{print $1 " / " $3"MB"}'
+
+
