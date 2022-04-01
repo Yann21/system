@@ -36,7 +36,7 @@ if [[ $(uname --all) =~ "arch" ]]; then
     udiskie &                                           # USB daemon
     aw-server &                                         # Windows and time tracker (*)
     #xscreensaver --no-splash -verbose &                 # Aerial screensaver
-    noip2 -c /etc/no-ip2.conf &
+    #noip2 -c /etc/no-ip2.conf &  # taken care of by systemd
     bluetooth-autoconnect & 
 fi
 
