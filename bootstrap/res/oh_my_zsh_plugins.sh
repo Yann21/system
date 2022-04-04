@@ -3,7 +3,7 @@
 pushd "$HOME/.oh-my-zsh/custom/plugins/" || exit
 
 clone_if_not_exist() {
-    [[ $# < 2 ]] && exit 0
+    [[ $# -lt 2 ]] && exit 0
 
     GIT_REPO=$1
     ALIAS=$2
@@ -22,12 +22,13 @@ CLONE_ME=(
     gradle/gradle-completion
     supercrabtree/k
     MichaelAquilina/zsh-autoswitch-virtualenv.git autoswitch_virtualenv
+    Aloxaf/fzf-tab
 )
 
-for repo in ${CLONE_ME[@]}; do
+for repo in "${CLONE_ME[@]}"; do
     # Split tuples
-    set -- $repo
-    clone_if_not_exist $1 $2
+    set -- "$repo"
+    clone_if_not_exist "$1" "$2"
 done
 
 
