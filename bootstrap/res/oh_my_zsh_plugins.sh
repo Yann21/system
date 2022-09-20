@@ -12,7 +12,7 @@ clone_if_not_exist() {
 }
 
 CLONE_ME=(
-    unixorn/fzf-zsh-plugin.git fzf
+    unixorn/fzf-zsh-plugin.git
     MichaelAquilina/zsh-auto-notify.git auto-notify
     MichaelAquilina/zsh-you-should-use.git you-should-use
     MichaelAquilina/zsh-you-should-use.git you-should-use
@@ -23,6 +23,8 @@ CLONE_ME=(
     supercrabtree/k
     MichaelAquilina/zsh-autoswitch-virtualenv.git autoswitch_virtualenv
     Aloxaf/fzf-tab
+    zdharma-continuum/fast-syntax-highlighting
+    jeffreytse/zsh-vi-mode
 )
 
 for repo in "${CLONE_ME[@]}"; do

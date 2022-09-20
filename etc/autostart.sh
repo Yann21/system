@@ -12,12 +12,13 @@ copyq &                                             # Clipboard manager
 numlockx on &                                       # Numlock (previously in lightdm.conf)
 xset r rate 190 8 &                                 # Typematic delays - previously 190 28
 mousetrap -t 5 &                                    # Auto hide mouse after 5s
-#xmodmap -e "keycode 49 = Caps_Lock NoSymbol Caps_Lock" & # Makes ^2 key act as caps lock (autokey most likely not working)
 ulauncher --hide-window --no-window-shadow &        # Dynamic menu
-firefox &                                           # Firefox
+GTK_USE_PORTAL=1 firefox &                          # Firefox
 xrdb ~/.Xresources &
-emacs &                                             # The one and only + Self Q&A
-ao &                                                # GTD
+emacs &                                             # The one and only
+#ticktick &                                         # GTD
+mailspring &                                        # Mail client
+timetrack &                                         # Boosted replacement
 
 # Synchronize important directories between machines
 gitwatch -r origin -b main "$HOME/Documents/Application/KnowledgeManager" &
