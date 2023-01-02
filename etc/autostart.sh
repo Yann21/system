@@ -18,7 +18,6 @@ xrdb ~/.Xresources &
 emacs &                                             # The one and only
 #ticktick &                                         # GTD
 mailspring &                                        # Mail client
-timetrack &                                         # Boosted replacement
 
 # Synchronize important directories between machines
 gitwatch -r origin -b main "$HOME/Documents/Application/KnowledgeManager" &
@@ -36,9 +35,10 @@ if [[ $(uname --all) =~ "arch" ]]; then
     code &
     udiskie &                                           # USB daemon
     aw-server &                                         # Windows and time tracker (*)
-    #xscreensaver --no-splash -verbose &                 # Aerial screensaver
+    xscreensaver --no-splash -verbose &                 # Aerial screensaver
     #noip2 -c /etc/no-ip2.conf &  # taken care of by systemd
     bluetooth-autoconnect & 
+    vorta --daemonize &                                 # Backup
 fi
 
 # Record screen (*) we're oom
