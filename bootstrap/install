@@ -25,7 +25,7 @@ fi
 
 # Prepare vim
 if [ ! -d "$HOME/.vim/plugged" ]; then
-    mkdir -p "$HOME/.vim/{backup,autoload,swap}"
+    mkdir -p $HOME/.vim/{backup,autoload,swap}
     firefox https://wakatime.com/api-key
     vim -E +"source $HOME/.vim/vimrc" +"PlugInstall" +qa
     "$HOME/.vim/plugged/YouCompleteMe/install.py" --all

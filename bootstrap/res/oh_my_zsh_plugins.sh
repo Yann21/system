@@ -12,19 +12,18 @@ clone_if_not_exist() {
 }
 
 CLONE_ME=(
-    unixorn/fzf-zsh-plugin.git
+    unixorn/fzf-zsh-plugin.git fzf-zsh-plugin
     MichaelAquilina/zsh-auto-notify.git auto-notify
-    MichaelAquilina/zsh-you-should-use.git you-should-use
     MichaelAquilina/zsh-you-should-use.git you-should-use
     hlissner/zsh-autopair.git autopair
     agkozak/zsh-z.git z
-    zsh-users/zsh-completions.git
-    gradle/gradle-completion
-    supercrabtree/k
+    zsh-users/zsh-completions.git zsh-completions
+    gradle/gradle-completion gradle-completion
+    supercrabtree/k k
     MichaelAquilina/zsh-autoswitch-virtualenv.git autoswitch_virtualenv
-    Aloxaf/fzf-tab
-    zdharma-continuum/fast-syntax-highlighting
-    jeffreytse/zsh-vi-mode
+    Aloxaf/fzf-tab fzf-tab
+    zdharma-continuum/fast-syntax-highlighting fast-syntax-highlighting
+    jeffreytse/zsh-vi-mode zsh-vi-mode
 )
 
 for repo in "${CLONE_ME[@]}"; do

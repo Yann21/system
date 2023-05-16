@@ -3,8 +3,8 @@
 # Equivalent of xinit for startup programs
 # or $XDG_CONFIG_HOME/autostart/*.desktop
 
-redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
-"$HOME/.screenlayout/arandrrc_triple.sh" &                   # Double monitor layout
+#"$HOME/.screenlayout/arandrrc_docked_laptop.sh" &                   # Double monitor layout
+autorandr -c
 nitrogen --restore &                                # Wallpaper
 picom -b &                                          # Compositor, transparency
 autokey-gtk &                                       # Rebinds bash bindings all over the place
@@ -31,6 +31,7 @@ gitwatch -r origin -b main "$HOME/.local/share/calibre" &
 if [[ $(uname --all) =~ "arch" ]]; then
 #if [[ $(hostname) =~ "yann-desktop" ]]; then
 #if [[ true ]]; then
+    redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
     ckb-next -b &                                       # Corsair bindings
     code &
     udiskie &                                           # USB daemon
