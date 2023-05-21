@@ -3,18 +3,10 @@
 # Equivalent of xinit for startup programs
 # or $XDG_CONFIG_HOME/autostart/*.desktop
 
-<<<<<<< HEAD
-#"$HOME/.screenlayout/arandrrc_docked_laptop.sh" &                   # Double monitor layout
-autorandr -c
-||||||| parent of fe811aa (Synchronize)
-redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
-"$HOME/.screenlayout/arandrrc_triple.sh" &                   # Double monitor layout
-=======
-redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
 autorandr -c &
->>>>>>> fe811aa (Synchronize)
+redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
 nitrogen --restore &                                # Wallpaper
-picom -b --config $HOME/.config/picom/picom.conf &  # Compositor, transparency
+picom -b --config "$HOME/.config/picom/picom.conf" &  # Compositor, transparency
 autokey-qt &                                        # Rebinds bash bindings all over the place
 copyq &                                             # Clipboard manager
 numlockx on &                                       # Numlock (previously in lightdm.conf)
@@ -24,16 +16,12 @@ ulauncher --no-window --no-window-shadow &          # Dynamic menu
 GTK_USE_PORTAL=1 firefox &                          # Firefox
 xrdb ~/.Xresources &
 emacs &                                             # The one and only
-#ticktick &                                         # GTD
 mailspring &                                        # Mail client
 nextcloud &
 
 # Synchronize important directories between machines
 gitwatch -r origin -b main "$HOME/Documents/Application/KnowledgeManager" &
 gitwatch -r origin -b main "$HOME/.local/share/calibre" &
-#gitwatch -r origin -b master $HOME/.xmonad &
-#gitwatch -r origin -b master $HOME/.dotfiles &
-#gitwatch -r origin -b master $HOME/system &
 
 
 # @Home
