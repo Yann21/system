@@ -3,21 +3,30 @@
 # Equivalent of xinit for startup programs
 # or $XDG_CONFIG_HOME/autostart/*.desktop
 
+<<<<<<< HEAD
 #"$HOME/.screenlayout/arandrrc_docked_laptop.sh" &                   # Double monitor layout
 autorandr -c
+||||||| parent of fe811aa (Synchronize)
+redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
+"$HOME/.screenlayout/arandrrc_triple.sh" &                   # Double monitor layout
+=======
+redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
+autorandr -c &
+>>>>>>> fe811aa (Synchronize)
 nitrogen --restore &                                # Wallpaper
-picom -b &                                          # Compositor, transparency
-autokey-gtk &                                       # Rebinds bash bindings all over the place
+picom -b --config $HOME/.config/picom/picom.conf &  # Compositor, transparency
+autokey-qt &                                        # Rebinds bash bindings all over the place
 copyq &                                             # Clipboard manager
 numlockx on &                                       # Numlock (previously in lightdm.conf)
-xset r rate 190 8 &                                 # Typematic delays - previously 190 28
+xset r rate 190 20 &                                # Typematic delays - previously 190 28 / 8
 mousetrap -t 5 &                                    # Auto hide mouse after 5s
-ulauncher --hide-window --no-window-shadow &        # Dynamic menu
+ulauncher --no-window --no-window-shadow &          # Dynamic menu
 GTK_USE_PORTAL=1 firefox &                          # Firefox
 xrdb ~/.Xresources &
 emacs &                                             # The one and only
 #ticktick &                                         # GTD
 mailspring &                                        # Mail client
+nextcloud &
 
 # Synchronize important directories between machines
 gitwatch -r origin -b main "$HOME/Documents/Application/KnowledgeManager" &
@@ -33,7 +42,7 @@ if [[ $(uname --all) =~ "arch" ]]; then
 #if [[ true ]]; then
     redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
     ckb-next -b &                                       # Corsair bindings
-    code &
+    code --disable-workspace-trust &
     udiskie &                                           # USB daemon
     aw-server &                                         # Windows and time tracker (*)
     xscreensaver --no-splash -verbose &                 # Aerial screensaver

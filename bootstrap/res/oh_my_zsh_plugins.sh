@@ -21,9 +21,21 @@ CLONE_ME=(
     gradle/gradle-completion gradle-completion
     supercrabtree/k k
     MichaelAquilina/zsh-autoswitch-virtualenv.git autoswitch_virtualenv
+<<<<<<< HEAD
     Aloxaf/fzf-tab fzf-tab
     zdharma-continuum/fast-syntax-highlighting fast-syntax-highlighting
     jeffreytse/zsh-vi-mode zsh-vi-mode
+||||||| parent of fe811aa (Synchronize)
+    Aloxaf/fzf-tab
+    zdharma-continuum/fast-syntax-highlighting
+    jeffreytse/zsh-vi-mode
+=======
+    Aloxaf/fzf-tab
+    zdharma-continuum/fast-syntax-highlighting
+    jeffreytse/zsh-vi-mode
+    spwhitt/nix-zsh-completions
+    chisui/zsh-nix-shell
+>>>>>>> fe811aa (Synchronize)
 )
 
 for repo in "${CLONE_ME[@]}"; do
