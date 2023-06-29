@@ -7,7 +7,7 @@ autorandr -c &
 redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
 nitrogen --restore &                                # Wallpaper
 picom -b --config "$HOME/.config/picom/picom.conf" &  # Compositor, transparency
-autokey-qt &                                        # Rebinds bash bindings all over the place
+python -m autokey.gtkui &                                        # Rebinds bash bindings all over the place
 copyq &                                             # Clipboard manager
 numlockx on &                                       # Numlock (previously in lightdm.conf)
 xset r rate 190 20 &                                # Typematic delays - previously 190 28 / 8
@@ -15,12 +15,12 @@ mousetrap -t 5 &                                    # Auto hide mouse after 5s
 ulauncher --no-window --no-window-shadow &          # Dynamic menu
 GTK_USE_PORTAL=1 firefox &                          # Firefox
 xrdb ~/.Xresources &
+emacs --daemon &
 emacs &                                             # The one and only
 mailspring &                                        # Mail client
-nextcloud &
+nextcloud --background &                            # Virtualization
 
 # Synchronize important directories between machines
-gitwatch -r origin -b main "$HOME/Documents/Application/KnowledgeManager" &
 gitwatch -r origin -b main "$HOME/.local/share/calibre" &
 
 
