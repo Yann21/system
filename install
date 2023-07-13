@@ -2,6 +2,7 @@
 
 # Install rcm requirement
 if ! command -v rcup &> /dev/null; then
+    echo "Installing rcm"
     # TODO: Put in temp folder
     curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.3.4.tar.gz &&
     
@@ -15,6 +16,7 @@ fi
 
 # Install dotfiles
 if [ ! -d "$HOME/.dotfiles" ]; then
+    echo "Installing dotfiles"
     cp -r dotfiles "$HOME/.dotfiles" &&
     make -C "$HOME/.dotfiles" default
 fi
@@ -27,16 +29,18 @@ fi
 
 # Install exa
 if ! command -v exa &> /dev/null; then
+    echo "Installing exa"
     EXA_TMP=$(mktemp --directory) &&
     EXA_VERSION="0.10.1" &&
     wget "https://github.com/ogham/exa/releases/download/v$EXA_VERSION/exa-linux-x86_64-v$EXA_VERSION.zip" \
         -O "$EXA_TMP/exa.zip" &&
     unzip "$EXA_TMP/exa.zip" -d $EXA_TMP &&
-    install "$EXA_TMP/bin/exa" "$HOME/test"
+    install "$EXA_TMP/bin/exa" "$HOME/.local/bin/"
 fi
 
 # Prepare vim
 if [ ! -d "$HOME/.vim/plugged" ]; then
+    echo "Installing vim"
     mkdir -p "$HOME/.vim/{backup,autoload,swap}" &&
     
     curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim &&
@@ -48,8 +52,9 @@ fi
 
 # Set terminal
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo "Installing oh-my-zsh"
     sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &&
-    ./../res/oh_my_zsh_plugins.sh &&
+    ./scripts/oh_my_zsh_plugins.sh &&
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" &&
     
     git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
@@ -64,6 +69,7 @@ fi
 
 # Installing monofont for Emacs
 if ! fc-list | grep -q "Ubuntu Mono Nerd"; then
+    echo "Installing monofont for Emacs"
     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip &&
     unzip UbuntuMono.zip -d "$HOME/.local/share/fonts" &&
     fc-cache -f -v

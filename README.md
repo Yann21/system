@@ -14,9 +14,6 @@ git clone https://github.com/Yann21/system.git
 
 
 ## Problems
-- 404 https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-0.10.1.zip
-- 404 https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-v0.10.1.zip
-- firefox command not found
 - home/users/yahoffmann/.vim/plugged/YouCompleteMe/install.py: No such file or directory
 - no sudo
 - Eager macro-expansion failure: (user-error "Detected Emacs 26.1, but Doom requires 27.1 or newer (28.1 is
@@ -28,3 +25,5 @@ git clone https://github.com/Yann21/system.git
 - command -v exa: shows alias even if executable doesn't h
 
 - mktemp != mktemp --directory
+- UbuntuMono.zip{,.1} left in the directory
+- Ubuntu relaunches every time
