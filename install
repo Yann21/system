@@ -1,9 +1,22 @@
 #!/usr/bin/env bash
 
+# Install rcm requirement
+if ! command -v rcup &> /dev/null; then
+    # TODO: Put in temp folder
+    curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.3.4.tar.gz &&
+    
+    tar -xvf rcm-1.3.4.tar.gz &&
+    cd rcm-1.3.4 &&
+    
+    ./configure --prefix=$HOME/.local/ &&
+    make &&
+    make install
+fi
+
 # Install dotfiles
 if [ ! -d "$HOME/.dotfiles" ]; then
-    cp -r dotfiles "$HOME/.dotfiles"
-    make -C "$HOME/.dotfiles" work # Choose between work or home
+    cp -r dotfiles "$HOME/.dotfiles" &&
+    make -C "$HOME/.dotfiles" default
 fi
 
 # Add ~/.local/bin to path
@@ -14,53 +27,54 @@ fi
 
 # Install exa
 if ! command -v exa &> /dev/null; then
-    EXA_TMP=$(mktemp)
-    EXA_VERSION=0.10.1
-    wget "https://github.com/ogham/exa/releases/download/v$EXA_VERSION/exa-linux-x86_64-$EXA_VERSION.zip" -O "$EXA_TMP"
-    unzip "$EXA_TMP" -d "$HOME"
-    install "$HOME/exa-linux-x86_64" "$HOME/.local/bin/exa"
+    EXA_TMP=$(mktemp --directory) &&
+    EXA_VERSION="0.10.1" &&
+    wget "https://github.com/ogham/exa/releases/download/v$EXA_VERSION/exa-linux-x86_64-v$EXA_VERSION.zip" \
+        -O "$EXA_TMP/exa.zip" &&
+    unzip "$EXA_TMP/exa.zip" -d $EXA_TMP &&
+    install "$EXA_TMP/bin/exa" "$HOME/test"
 fi
 
 # Prepare vim
 if [ ! -d "$HOME/.vim/plugged" ]; then
-    mkdir -p "$HOME/.vim/{backup,autoload,swap}"
+    mkdir -p "$HOME/.vim/{backup,autoload,swap}" &&
     
-    curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim &&
     
-    firefox https://wakatime.com/api-key
-    vim -E +"source $HOME/.vim/vimrc" +"PlugInstall" +qa
+    echo "Go to https://wakatime.com/api-key to get your api key"
+    vim -E +"source $HOME/.vim/vimrc" +"PlugInstall" +qa &&
     "$HOME/.vim/plugged/YouCompleteMe/install.py" --all
 fi
 
 # Set terminal
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    ./../res/oh_my_zsh_plugins.sh
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &&
+    ./../res/oh_my_zsh_plugins.sh &&
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" &&
     
     git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
 fi
 
 # Install emacs
 if [ ! -d "$HOME/.emacs.d" ]; then
-    git clone --depth 1 https://github.com/hlissner/doom-emacs "$HOME/.emacs.d"
+    git clone --depth 1 https://github.com/hlissner/doom-emacs "$HOME/.emacs.d" &&
     "$HOME/.emacs.d/bin/doom" install
 fi
 
 
 # Installing monofont for Emacs
 if ! fc-list | grep -q "Ubuntu Mono Nerd"; then
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip
-    unzip UbuntuMono.zip -d "$HOME/.local/share/fonts"
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip &&
+    unzip UbuntuMono.zip -d "$HOME/.local/share/fonts" &&
     fc-cache -f -v
 fi
 
 # Installing cpg and mvg
 if ! command -v cpg &> /dev/null; then
-    DIR=$(mktemp -d)
-    curl https://raw.githubusercontent.com/jarun/advcpmv/master/install.sh --create-dirs -o "$DIR/install.sh"
-    (cd "$DIR" && sh install.sh)
-    install "$DIR/advcp" "$HOME/.local/bin/cpg"
+    DIR=$(mktemp -d) &&
+    curl https://raw.githubusercontent.com/jarun/advcpmv/master/install.sh --create-dirs -o "$DIR/install.sh" &&
+    (cd "$DIR" && sh install.sh) &&
+    install "$DIR/advcp" "$HOME/.local/bin/cpg" &&
     install "$DIR/advmv" "$HOME/.local/bin/mvg"
 fi
 
