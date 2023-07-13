@@ -12,27 +12,28 @@ clone_if_not_exist() {
 }
 
 CLONE_ME=(
-    unixorn/fzf-zsh-plugin.git fzf-zsh-plugin
-    MichaelAquilina/zsh-auto-notify.git auto-notify
-    MichaelAquilina/zsh-you-should-use.git you-should-use
-    hlissner/zsh-autopair.git autopair
-    agkozak/zsh-z.git z
-    zsh-users/zsh-completions.git zsh-completions
-    gradle/gradle-completion gradle-completion
-    supercrabtree/k k
-    MichaelAquilina/zsh-autoswitch-virtualenv.git autoswitch_virtualenv
-    Aloxaf/fzf-tab fzf-tab
-    zdharma-continuum/fast-syntax-highlighting fast-syntax-highlighting
-    jeffreytse/zsh-vi-mode zsh-vi-mode
-    spwhitt/nix-zsh-completions
-    chisui/zsh-nix-shell
->>>>>>> fe811aa (Synchronize)
+    "unixorn/fzf-zsh-plugin.git fzf-zsh-plugin"
+    "MichaelAquilina/zsh-auto-notify.git auto-notify"
+    "MichaelAquilina/zsh-you-should-use.git you-should-use"
+    "hlissner/zsh-autopair.git autopair"
+    "agkozak/zsh-z.git z"
+    "zsh-users/zsh-completions.git zsh-completions"
+    "gradle/gradle-completion gradle-completion"
+    "supercrabtree/k k"
+    "MichaelAquilina/zsh-autoswitch-virtualenv.git autoswitch_virtualenv"
+    "Aloxaf/fzf-tab fzf-tab"
+    "zdharma-continuum/fast-syntax-highlighting fast-syntax-highlighting"
+    "jeffreytse/zsh-vi-mode zsh-vi-mode"
+    "spwhitt/nix-zsh-completions"
+    "chisui/zsh-nix-shell"
 )
 
 for repo in "${CLONE_ME[@]}"; do
     # Split tuples
-    set -- "$repo"
-    clone_if_not_exist "$1" "$2"
+    REPO_NAME=$(echo "$repo" | cut -d' ' -f1)
+    REPO_URL=$(echo "$repo" | cut -d' ' -f2)
+
+    clone_if_not_exist "$REPO_NAME" "$REPO_URL"
 done
 
 
