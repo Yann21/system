@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+# Install fasd utility
+if ! command -v fasd &> /dev/null; then
+    echo "Installing fasd"
+    FASD_TMP=$(mktemp --directory) &&
+    FASD_VERSION="1.0.1" &&
+    wget "https://github.com/clvv/fasd/tarball/1.0.1" \
+        -O "${FASD_TMP}/fasd.tar.gz" &&
+    tar -xvf "$FASD_TMP/fasd.tar.gz" -C "${FASD_TMP}" &&
+    install "${FASD_TMP}/clvv-fasd-*/fasd" "${HOME}/.local/bin"
+fi
+
 # Install bat utility
 if ! command -v bat &> /dev/null; then
     echo "Installing bat"
