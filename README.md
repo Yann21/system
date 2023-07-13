@@ -27,3 +27,4 @@ git clone https://github.com/Yann21/system.git
 - mktemp != mktemp --directory
 - UbuntuMono.zip{,.1} left in the directory
 - Ubuntu relaunches every time
+- install bat https://github.com/sharkdp/bat/releases/download/v0.23.0/bat-v0.23.0-x86_64-unknown-linux-gnu.tar.gz

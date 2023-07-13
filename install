@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+# Install bat utility
+if ! command -v bat &> /dev/null; then
+    echo "Installing bat"
+    BAT_TMP=$(mktemp --directory) &&
+    BAT_VERSION="0.23.0" &&
+    wget "https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat-v${BAT_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
+        -O "${BAT_TMP}/bat.tar.gz" &&
+    tar -xvf "$BAT_TMP/bat.tar.gz" -C "${BAT_TMP}" &&
+    install "${BAT_TMP}/bat-v${BAT_VERSION}-x86_64-unknown-linux-gnu/bat" "${HOME}/.local/bin"
+fi
+
 # Install rcm requirement
 if ! command -v rcup &> /dev/null; then
     echo "Installing rcm"
@@ -79,7 +90,7 @@ fi
 if ! command -v cpg &> /dev/null; then
     DIR=$(mktemp -d) &&
     curl https://raw.githubusercontent.com/jarun/advcpmv/master/install.sh --create-dirs -o "$DIR/install.sh" &&
-    (cd "$DIR" && sh install.sh) &&
+    (cd "$DIR" && sh install.sh 0.8 8.32) &&
     install "$DIR/advcp" "$HOME/.local/bin/cpg" &&
     install "$DIR/advmv" "$HOME/.local/bin/mvg"
 fi
