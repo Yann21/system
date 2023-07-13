@@ -8,7 +8,7 @@ if ! command -v fasd &> /dev/null; then
     wget "https://github.com/clvv/fasd/tarball/1.0.1" \
         -O "${FASD_TMP}/fasd.tar.gz" &&
     tar -xvf "$FASD_TMP/fasd.tar.gz" -C "${FASD_TMP}" &&
-    install "${FASD_TMP}/clvv-fasd-*/fasd" "${HOME}/.local/bin"
+    install "${FASD_TMP}/clvv-fasd-4822024/fasd" "${HOME}/.local/bin"
 fi
 
 # Install bat utility
