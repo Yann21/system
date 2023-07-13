@@ -1,6 +1,0 @@
-repos:
-    - repo: https://github.com/koalaman/shellcheck-precommit
-      rev: v0.8.0
-      hooks:
-          - id: shellcheck
-            #args: ["--severity=warning"]

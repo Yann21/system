@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-python3 "$HOME/system/scripts/dynamic_resolve.python" $1

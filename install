@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# TODO: ingest parameter
-#INSTALLATION_TYPE=$1 # Work or home
 
 # Install dotfiles
 if [ ! -d "$HOME/.dotfiles" ]; then
@@ -26,21 +24,20 @@ fi
 # Prepare vim
 if [ ! -d "$HOME/.vim/plugged" ]; then
     mkdir -p "$HOME/.vim/{backup,autoload,swap}"
-
+    
     curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
+    
     firefox https://wakatime.com/api-key
     vim -E +"source $HOME/.vim/vimrc" +"PlugInstall" +qa
     "$HOME/.vim/plugged/YouCompleteMe/install.py" --all
 fi
 
-#chsh --shell /bin/zsh
 # Set terminal
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    ./res/oh_my_zsh_plugins.sh
+    ./../res/oh_my_zsh_plugins.sh
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-
+    
     git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
 fi
 

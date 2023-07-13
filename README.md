@@ -1,9 +1,17 @@
-# Scripts
+# System
 
-## Content
-* [bin/](bin) - contains utility CLI tools
-* [benchmark/](benchmark) - TBD system benchmarks
-* [boostrap/](bootstrap)
-    * Boostrap a new Arch Linux system from scretch (c)
-    * Install dotfiles and colonize a remote server
-* [etc/](etc) - configuration files and install scripts
+## Prerequisites
+`sudo apt install rcm yarnpkg cmake golang npm curl inotify-tools`
+
+## Start
+```
+git clone https://github.com/Yann21/system.git
+./install.sh
+```
+
+## Finishing touches
+`sudo apt install fzf conda fasd bat python3-venv libnotify-bin`
+
+
+## Problems
+- 
