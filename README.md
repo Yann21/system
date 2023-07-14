@@ -1,6 +1,10 @@
 # System
 
 ## Prerequisites
+```{bash}
+sudo apt install zsh unzip make
+```
+
 `sudo apt install rcm yarnpkg cmake golang npm curl inotify-tools`
 
 ## Start
@@ -21,3 +25,7 @@ git clone https://github.com/Yann21/system.git
 - command -v exa: shows alias even if executable doesn't h
 - UbuntuMono.zip{,.1} left in the directory
 - Ubuntu relaunches every time
+- Creating
+- Doesn't work if $HOME/.local/bin doesn't exist
+- Create user not root
+- Add ~/.local/bin to PATH
