@@ -61,6 +61,7 @@ if ! command -v exa &> /dev/null; then
 fi
 
 # Prepare vim
+# TODO require yarn
 if [ ! -d "$HOME/.vim/plugged" ]; then
     echo "Installing vim"
     mkdir -p "$HOME/.vim/{backup,autoload,swap}" &&
@@ -68,8 +69,8 @@ if [ ! -d "$HOME/.vim/plugged" ]; then
     curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim &&
     
     echo "Go to https://wakatime.com/api-key to get your api key"
-    vim -E +"source $HOME/.vim/vimrc" +"PlugInstall" +qa &&
-    "$HOME/.vim/plugged/YouCompleteMe/install.py" --all
+    vim -E +"source $HOME/.vim/vimrc" +"PlugInstall" +qa
+    # "$HOME/.vim/plugged/YouCompleteMe/install.py" --all
 fi
 
 # Set terminal
@@ -98,6 +99,7 @@ if ! fc-list | grep -q "Ubuntu Mono Nerd"; then
 fi
 
 # Installing cpg and mvg
+# Requires gcc
 if ! command -v cpg &> /dev/null; then
     DIR=$(mktemp -d) &&
     curl https://raw.githubusercontent.com/jarun/advcpmv/master/install.sh --create-dirs -o "$DIR/install.sh" &&
