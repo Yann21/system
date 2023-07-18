@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+touch "$HOME/.rangerdir"
+
 # Install fasd utility
 if ! command -v fasd &> /dev/null; then
     echo "Installing fasd"
@@ -56,7 +58,7 @@ if ! command -v exa &> /dev/null; then
     EXA_VERSION="0.10.1" &&
     wget "https://github.com/ogham/exa/releases/download/v$EXA_VERSION/exa-linux-x86_64-v$EXA_VERSION.zip" \
         -O "$EXA_TMP/exa.zip" &&
-    unzip "$EXA_TMP/exa.zip" -d $EXA_TMP &&
+    unzip "$EXA_TMP/exa.zip" -d "$EXA_TMP" &&
     install "$EXA_TMP/bin/exa" "$HOME/.local/bin/"
 fi
 
@@ -64,7 +66,7 @@ fi
 # TODO require yarn
 if [ ! -d "$HOME/.vim/plugged" ]; then
     echo "Installing vim"
-    mkdir -p "$HOME/.vim/{backup,autoload,swap}" &&
+    mkdir -p "$HOME/.vim/"{backup,autoload,swap} &&
     
     curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim &&
     
