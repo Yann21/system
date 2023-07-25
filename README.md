@@ -29,3 +29,8 @@ git clone https://github.com/Yann21/system.git
 - Doesn't work if $HOME/.local/bin doesn't exist
 - Create user not root
 - Add ~/.local/bin to PATH
+
+## GUI Problems
+- Add native messenger to install script
+curl -fsSl https://raw.githubusercontent.com/tridactyl/native_messenger/master/installers/install.sh -o /tmp/trinativeinstall.sh && sh /tmp/trinativeinstall.sh 1.23.0
+Create ~/.local/share tridactyl
