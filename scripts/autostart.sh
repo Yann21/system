@@ -3,9 +3,8 @@
 # Equivalent of xinit for startup programs
 # or $XDG_CONFIG_HOME/autostart/*.desktop
 
-autorandr -c &
+autorandr -c --debug &
 redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
-nitrogen --restore &                                # Wallpaper
 python -m autokey.gtkui &                                        # Rebinds bash bindings all over the place
 copyq &                                             # Clipboard manager
 numlockx on &                                       # Numlock (previously in lightdm.conf)
@@ -15,16 +14,15 @@ ulauncher --hide-window --no-window-shadow &        # Dynamic menu
 GTK_USE_PORTAL=1 firefox &                          # Firefox
 xrdb ~/.Xresources &
 emacs --daemon &
-emacs &                                             # The one and only
+emacs &                      # The one and only
 mailspring &                                        # Mail client
 nextcloud --background &                            # Virtualization
-xscreensaver --no-splash -verbose &                 # Aerial screensaver
+xss-lock -- i3lock-color &
+xscreensaver --no-splash &                 # Aerial screensaver
 ckb-next -b &                                       # Corsair bindings
 code --disable-workspace-trust &
 
-# Synchronize important directories between machines
-gitwatch -r origin -b main "$HOME/.local/share/calibre" &
-
+nitrogen --restore &                                # Wallpaper
 
 if [[ $(hostname) =~ "yann-desktop" ]]; then
     udiskie &                                           # USB daemon
