@@ -17,6 +17,7 @@ emacs --daemon &
 emacs &                      # The one and only
 mailspring &                                        # Mail client
 nextcloud --background &                            # Virtualization
+python3 /opt/thefanclub/overgrive/overgrive &
 xscreensaver --no-splash &                 # Aerial screensaver
 #xss-lock -- "$HOME/system/scripts/lock.sh" &
 #xset s 5 &
