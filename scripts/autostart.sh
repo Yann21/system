@@ -17,8 +17,9 @@ emacs --daemon &
 emacs &                      # The one and only
 mailspring &                                        # Mail client
 nextcloud --background &                            # Virtualization
-xss-lock -- i3lock-color &
 xscreensaver --no-splash &                 # Aerial screensaver
+#xss-lock -- "$HOME/system/scripts/lock.sh" &
+#xset s 5 &
 ckb-next -b &                                       # Corsair bindings
 code --disable-workspace-trust &
 

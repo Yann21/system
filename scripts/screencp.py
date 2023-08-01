@@ -44,7 +44,7 @@ def latest_modified_file(folder):
 
 
 def latest_screenshot():
-  screen_path = "/" + "/".join(path_to_file(tree, "screenshots"))
+  screen_path = "/" + "/".join(path_to_file("/home/yann/Documents/Media/screenshots/", "screenshots"))
   return latest_modified_file(screen_path)
 
 

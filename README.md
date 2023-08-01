@@ -2,14 +2,14 @@
 
 ## Prerequisites
 ```{bash}
-sudo apt install zsh unzip make
+sudo apt install zsh unzip make fasd python3
 ```
 
 `sudo apt install rcm yarnpkg cmake golang npm curl inotify-tools`
 
 ## Start
 ```
-git clone https://github.com/Yann21/system.git
+git clone --recurse-submodules https://github.com/Yann21/system.git
 ./install.sh
 ```
 
@@ -27,8 +27,13 @@ git clone https://github.com/Yann21/system.git
 - Ubuntu relaunches every time
 - Creating
 - Doesn't work if $HOME/.local/bin doesn't exist
+- mkdir ~/.local/bin
 - Create user not root
 - Add ~/.local/bin to PATH
+- omz_plugins.sh not working with the env variables
+
+## TODO
+Create ~/.local/bin
 
 ## GUI Problems
 - Add native messenger to install script
