@@ -12,7 +12,7 @@ import yaml
 
 HOME = os.environ.get("HOME")
 with open(
-  f"{HOME}/system/scripts/dynamic_resolve.python/directory_structure.yml", "r"
+  f"{HOME}/system/bin/dynamic_resolve.python/directory_structure.yml", "r"
 ) as stream:
   tree = yaml.safe_load(stream)
 

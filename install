@@ -48,7 +48,7 @@ fi
 # Add ~/.local/bin to path
 if [ -f /etc/profile.d/custom-path.sh ]; then
     echo "PATH=\$PATH:\$HOME/.local/bin" | sudo tee /etc/profile.d/custom-path.sh &> /dev/null
-    echo "PATH=\$PATH:\$HOME/system/scripts" | sudo tee /etc/profile.d/custom-path.sh &> /dev/null
+    echo "PATH=\$PATH:\$HOME/system/bin" | sudo tee /etc/profile.d/custom-path.sh &> /dev/null
 fi
 
 # Install exa
@@ -79,7 +79,7 @@ fi
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo "Installing oh-my-zsh"
     sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &&
-    "$HOME/system/scripts/omz_plugins.sh" &&
+    "$HOME/system/bin/omz_plugins.sh" &&
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" &&
     
     git clone https://github.com/zsh-users/zsh-completions "${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions"
