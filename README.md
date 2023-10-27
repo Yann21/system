@@ -19,21 +19,19 @@ git clone --recurse-submodules https://github.com/Yann21/system.git
 
 ## Problems
 - home/users/yahoffmann/.vim/plugged/YouCompleteMe/install.py: No such file or directory
-- no sudo
-- Eager macro-expansion failure: (user-error "Detected Emacs 26.1, but Doom requires 27.1 or newer (28.1 is
 
 - command -v exa: shows alias even if executable doesn't h
-- UbuntuMono.zip{,.1} left in the directory
-- Ubuntu relaunches every time
-- Creating
-- Doesn't work if $HOME/.local/bin doesn't exist
-- mkdir ~/.local/bin
 - Create user not root
 - Add ~/.local/bin to PATH
 - omz_plugins.sh not working with the env variables
 
-## TODO
-Create ~/.local/bin
+Ansible
+- dotfiles make run will block when asking to overwrite ~/.profile
+- Same with vim
+- ohmyzsh line is creating a zsh shell and stopping the install script
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &&
+- adcpmv takes a shit long time
+
 
 ## GUI Problems
 - Add native messenger to install script
