@@ -22,7 +22,7 @@ xscreensaver --no-splash &                 # Aerial screensaver
 #xss-lock -- "$HOME/system/scripts/lock.sh" &
 xset r rate 190 20 &
 ckb-next -b &                                       # Corsair bindings
-code --disable-workspace-trust &
+#code --disable-workspace-trust &
 rescuetime &
 
 nitrogen --restore &                                # Wallpaper
