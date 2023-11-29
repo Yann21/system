@@ -15,7 +15,8 @@ GTK_USE_PORTAL=1 firefox &                          # Firefox
 xrdb ~/.Xresources &
 emacs --daemon &
 emacs &                      # The one and only
-thunderbird &                                        # Mail client
+#thunderbird &                                        # Mail client
+mailspring &
 nextcloud --background &                            # Virtualization
 #python3 /opt/thefanclub/overgrive/overgrive &
 xscreensaver --no-splash &                 # Aerial screensaver
