@@ -5,10 +5,9 @@
 
 autorandr -c --debug &
 redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
-python -m autokey.gtkui &                                        # Rebinds bash bindings all over the place
+python -m autokey.gtkui &                           # Rebinds bash bindings all over the place
 copyq &                                             # Clipboard manager
 numlockx on &                                       # Numlock (previously in lightdm.conf)
-xset r rate 190 20 &                                # Typematic delays - previously 190 28 / 8
 mousetrap -t 5 &                                    # Auto hide mouse after 5s
 ulauncher --hide-window --no-window-shadow &        # Dynamic menu
 GTK_USE_PORTAL=1 firefox &                          # Firefox
@@ -21,12 +20,12 @@ nextcloud --background &                            # Virtualization
 #python3 /opt/thefanclub/overgrive/overgrive &
 xscreensaver --no-splash &                 # Aerial screensaver
 #xss-lock -- "$HOME/system/scripts/lock.sh" &
-xset r rate 190 20 &
 ckb-next -b &                                       # Corsair bindings
-#code --disable-workspace-trust &
 rescuetime &
+code --disable-workspace-trust &
 
-nitrogen --restore &                                # Wallpaper
+feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
+xset r rate 190 20 &
 
 if [[ $(hostname) =~ "yann-desktop" ]]; then
     udiskie &                                           # USB daemon
@@ -35,3 +34,4 @@ if [[ $(hostname) =~ "yann-desktop" ]]; then
     vorta --daemonize &                                 # Backup
 fi
 
+xset r rate 190 20 &
