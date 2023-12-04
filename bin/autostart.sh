@@ -5,7 +5,8 @@
 
 autorandr -c --debug &
 redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
-python -m autokey.gtkui &                           # Rebinds bash bindings all over the place
+#python -m autokey.gtkui &                                        # Rebinds bash bindings all over the place
+autokey-gtk &					    # Autokey
 copyq &                                             # Clipboard manager
 numlockx on &                                       # Numlock (previously in lightdm.conf)
 mousetrap -t 5 &                                    # Auto hide mouse after 5s
