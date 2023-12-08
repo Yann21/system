@@ -15,15 +15,14 @@ GTK_USE_PORTAL=1 firefox &                          # Firefox
 xrdb ~/.Xresources &
 emacs --daemon &
 emacs &                      # The one and only
-#thunderbird &                                        # Mail client
 mailspring &
 nextcloud --background &                            # Virtualization
-#python3 /opt/thefanclub/overgrive/overgrive &
 xscreensaver --no-splash &                 # Aerial screensaver
-#xss-lock -- "$HOME/system/scripts/lock.sh" &
 ckb-next -b &                                       # Corsair bindings
-rescuetime &
-code --disable-workspace-trust &
+#thunderbird &                                        # Mail client
+#python3 /opt/thefanclub/overgrive/overgrive &
+#xss-lock -- "$HOME/system/scripts/lock.sh" &
+#code --disable-workspace-trust &
 
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
 xset r rate 190 20 &
