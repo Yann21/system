@@ -22,15 +22,15 @@ nextcloud --background &                            # Virtualization
 xscreensaver --no-splash &                 # Aerial screensaver
 #xss-lock -- "$HOME/system/scripts/lock.sh" &
 ckb-next -b &                                       # Corsair bindings
-#rescuetime &
 code --disable-workspace-trust &
+aw-awatcher &
 
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
 xset r rate 190 20 &
 
 if [[ $(hostname) =~ "yann-desktop" ]]; then
     udiskie &                                           # USB daemon
-    aw-server &                                         # Windows and time tracker (*)
+    #aw-server &                                         # Windows and time tracker (*)
     bluetooth-autoconnect & 
     vorta --daemonize &                                 # Backup
 fi
