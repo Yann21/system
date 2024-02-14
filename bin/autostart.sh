@@ -24,6 +24,7 @@ xscreensaver --no-splash &                 # Aerial screensaver
 ckb-next -b &                                       # Corsair bindings
 code --disable-workspace-trust &
 aw-awatcher &
+"$HOME/.pyenv/shims/selfspy" -p "" -d "$HOME" &
 
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
 xset r rate 190 20 &
