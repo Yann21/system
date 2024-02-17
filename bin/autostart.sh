@@ -5,7 +5,6 @@
 
 autorandr -c --debug &
 redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
-#python -m autokey.gtkui &                                        # Rebinds bash bindings all over the place
 autokey-gtk &					    # Autokey
 copyq &                                             # Clipboard manager
 numlockx on &                                       # Numlock (previously in lightdm.conf)
@@ -16,7 +15,6 @@ xrdb ~/.Xresources &
 emacs --daemon &
 emacs &                      # The one and only
 thunderbird &                                        # Mail client
-#mailspring &
 nextcloud --background &                            # Virtualization
 #python3 /opt/thefanclub/overgrive/overgrive &
 xscreensaver --no-splash &                 # Aerial screensaver
@@ -25,13 +23,11 @@ ckb-next -b &                                       # Corsair bindings
 code --disable-workspace-trust &
 aw-awatcher &
 "$HOME/.pyenv/shims/selfspy" -p "" -d "$HOME" &
-
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
 xset r rate 190 20 &
 
 if [[ $(hostname) =~ "yann-desktop" ]]; then
     udiskie &                                           # USB daemon
-    #aw-server &                                         # Windows and time tracker (*)
     bluetooth-autoconnect & 
     vorta --daemonize &                                 # Backup
 fi
