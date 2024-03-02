@@ -20,7 +20,7 @@ nextcloud --background &                            # Virtualization
 xscreensaver --no-splash &                 # Aerial screensaver
 #xss-lock -- "$HOME/system/scripts/lock.sh" &
 ckb-next -b &                                       # Corsair bindings
-code --disable-workspace-trust &
+#code --disable-workspace-trust &
 aw-awatcher &
 "$HOME/.pyenv/shims/selfspy" -p "" -d "$HOME" &
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
