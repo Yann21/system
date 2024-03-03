@@ -21,9 +21,9 @@ xscreensaver --no-splash &                 # Aerial screensaver
 #xss-lock -- "$HOME/system/scripts/lock.sh" &
 ckb-next -b &                                       # Corsair bindings
 #code --disable-workspace-trust &
-/opt/activitywatcher/aw-server/aw-server &
-/opt/activitywatcher/aw-watcher-afk/aw-watcher-afk &
-/opt/activitywatcher/aw-watcher-window/aw-watcher-window &
+/opt/activitywatch/aw-server/aw-server &
+/opt/activitywatch/aw-watcher-afk/aw-watcher-afk &
+/opt/activitywatch/aw-watcher-window/aw-watcher-window &
 
 "$HOME/.pyenv/shims/selfspy" -p "" -d "$HOME" &
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
