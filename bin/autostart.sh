@@ -10,7 +10,8 @@ copyq &                                             # Clipboard manager
 numlockx on &                                       # Numlock (previously in lightdm.conf)
 mousetrap -t 5 &                                    # Auto hide mouse after 5s
 ulauncher --hide-window --no-window-shadow &        # Dynamic menu
-GTK_USE_PORTAL=1 firefox &                          # Firefox
+#GTK_USE_PORTAL=1 firefox &                          # Firefox
+firefox &                          # Firefox
 xrdb ~/.Xresources &
 emacs --daemon &
 emacs &                      # The one and only
