@@ -6,6 +6,27 @@ REGION="us-east-1"
 # Get the current status of the instance
 STATUS=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --region $REGION --query 'Reservations[*].Instances[*].State.Name' --output text)
 
+# Function to handle termination cleanly
+cleanup() {
+  # Insert cleanup commands here
+  echo Stopping instance
+  aws ec2 stop-instances --instance-ids $INSTANCE_ID --region $REGION
+}
+
+trap cleanup SIGINT SIGHUP
+
+
+# Function to attempt SSH connection using a SOCKS proxy
+establish_ssh_connection() {
+  echo "Attempting to connect via SSH with SOCKS proxy..."
+  while ! ssh -o ConnectTimeout=5 -T -D 9999 proxy; do
+    echo "SSH connection failed, retrying..."
+    sleep 10  # sleep for 10 seconds before retrying
+  done
+  echo "SSH connection established."
+}
+
+
 # Based on the status, either stop or start the instance
 case $STATUS in
   "running")
@@ -16,10 +37,12 @@ case $STATUS in
   "stopped")
     echo "Instance is stopped. Starting instance now..."
     aws ec2 start-instances --instance-ids $INSTANCE_ID --region $REGION
+    establish_ssh_connection
     ;;
 
   *)
     echo "Instance is in a state that does not allow start/stop through this script."
     ;;
 esac
+
 
