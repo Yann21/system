@@ -25,6 +25,7 @@ ckb-next -b &                                       # Corsair bindings
 /opt/activitywatch/aw-server/aw-server &
 /opt/activitywatch/aw-watcher-afk/aw-watcher-afk &
 /opt/activitywatch/aw-watcher-window/aw-watcher-window &
+xbindkeys &
 
 "$HOME/.pyenv/shims/selfspy" -p "" -d "$HOME" &
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
