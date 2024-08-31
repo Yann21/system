@@ -31,6 +31,10 @@ xbindkeys &
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
 xset r rate 190 20 &
 
+if [[ $(hostname) =~ "yann-laptop" ]]; then
+    powerkit &
+fi
+
 if [[ $(hostname) =~ "yann-desktop" ]]; then
     udiskie &                                           # USB daemon
     bluetooth-autoconnect & 
