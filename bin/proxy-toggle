@@ -19,7 +19,7 @@ trap cleanup SIGINT SIGHUP
 # Function to attempt SSH connection using a SOCKS proxy
 establish_ssh_connection() {
   echo "Attempting to connect via SSH with SOCKS proxy..."
-  while ! ssh -o ConnectTimeout=5 -T -D 9999 proxy; do
+  while ! ssh -o ConnectTimeout=5 -T -D 9999 -f -N proxy; do
     echo "SSH connection failed, retrying..."
     sleep 10  # sleep for 10 seconds before retrying
   done
