@@ -15,7 +15,7 @@ firefox &                          # Firefox
 xrdb ~/.Xresources &
 emacs --daemon &
 emacs &                      # The one and only
-thunderbird &                                        # Mail client
+#thunderbird &                                        # Mail client
 nextcloud --background &                            # Virtualization
 #python3 /opt/thefanclub/overgrive/overgrive &
 xscreensaver --no-splash &                 # Aerial screensaver
@@ -26,6 +26,7 @@ ckb-next -b &                                       # Corsair bindings
 /opt/activitywatch/aw-watcher-afk/aw-watcher-afk &
 /opt/activitywatch/aw-watcher-window/aw-watcher-window &
 xbindkeys &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 "$HOME/.pyenv/shims/selfspy" -p "" -d "$HOME" &
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
