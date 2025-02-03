@@ -25,8 +25,9 @@ ckb-next -b &                                       # Corsair bindings
 /opt/activitywatch/aw-server/aw-server &
 /opt/activitywatch/aw-watcher-afk/aw-watcher-afk &
 /opt/activitywatch/aw-watcher-window/aw-watcher-window &
-xbindkeys &
+#xbindkeys &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
 
 "$HOME/.pyenv/shims/selfspy" -p "" -d "$HOME" &
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
@@ -38,7 +39,7 @@ fi
 
 if [[ $(hostname) =~ "yann-desktop" ]]; then
     udiskie &                                           # USB daemon
-    bluetooth-autoconnect & 
+    systemd-run --user --on-active=10s bluetooth-autoconnect &
     vorta --daemonize &                                 # Backup
 fi
 
