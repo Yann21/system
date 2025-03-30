@@ -1,33 +1,41 @@
 #!/bin/bash
 
-# Step 1: SSH into Hetzner and copy the originals to a local backup folder
-echo "Copying files from Docker container on Hetzner to paperless_backup..."
-ssh hetzner "docker container cp paperless-ng:/data/media/documents/originals/ paperless_backup"
+# Remote SSH details
+HETZNER_USER="yann"
+REMOTE_BACKUP_DIR="/home/$HETZNER_USER/paperless_backup"
+TIMESTAMP=$(date +'%m_%Y')
+REMOTE_ARCHIVE="$REMOTE_BACKUP_DIR/paperless_backup_$TIMESTAMP.tar.gz"
+LOCAL_BACKUP_DIR="$HOME/Documents/Backup"
 
-# Step 2: SSH into Hetzner and create a tar.gz archive of the backup folder to compress it
-echo "Compressing paperless_backup into a tar.gz archive..."
-ssh hetzner "tar -czf paperless_backup.tar.gz paperless_backup"
+echo "Starting Paperless NG backup from Hetzner Kubernetes cluster..."
 
-# Step 3: Securely copy the tar.gz archive to your local machine
-echo "Transferring the tar.gz archive to your local machine..."
-scp hetzner:paperless_backup.tar.gz .
+# Step 1: SSH into Hetzner and execute the backup commands
+ssh hetzner << 'EOF'
+    echo "Finding Paperless NG pod..."
+    POD_NAME=$(microk8s kubectl get pod -n default -l app=paperless-ng -o jsonpath="{.items[0].metadata.name}")
+    REMOTE_DIR="/data/media/documents/originals"
+    BACKUP_DIR="/home/$USER/paperless_backup"
 
-# Step 4: Unpack the tar.gz archive locally
-echo "Unpacking the tar.gz archive locally..."
-tar -xzf paperless_backup.tar.gz
+    echo "Copying files from Kubernetes pod to server..."
+    mkdir -p "$BACKUP_DIR"
+    microk8s kubectl cp "default/$POD_NAME:$REMOTE_DIR" "$BACKUP_DIR"
 
-# Step 5: SSH into Hetzner and remove the uncompressed folder and the tar.gz archive
-echo "Cleaning up remote server: removing the uncompressed folder and tar.gz archive..."
-ssh hetzner "rm -r paperless_backup paperless_backup.tar.gz"
+    echo "Compressing backup..."
+    tar -czf "$BACKUP_DIR/paperless_backup_$(date +'%m_%Y').tar.gz" -C "$BACKUP_DIR" .
 
-# Step 6: Remove the tar.gz file locally (optional, if you don't need to keep the archive)
-echo "Removing the local tar.gz archive..."
-rm paperless_backup.tar.gz
+    echo "Cleanup temporary extracted backup..."
+    rm -rf "$BACKUP_DIR/originals"
 
-# Step 7: Move the paperless_backup folder to ~/Documents/Backup with the current month and year
-current_date=$(date +'%m_%Y')
-echo "Moving paperless_backup to ~/Documents/Backup/paperless_$current_date..."
-mv paperless_backup ~/Documents/Backup/paperless_$current_date
+    echo "Backup complete on Hetzner."
+EOF
 
-echo "Backup process completed successfully."
+# Step 2: Securely copy the tar.gz archive to local machine
+echo "Transferring the backup archive from Hetzner to local machine..."
+scp "hetzner:$REMOTE_ARCHIVE" "$LOCAL_BACKUP_DIR/"
+
+# Step 3: SSH into Hetzner and clean up the remote backup
+echo "Cleaning up backup files on Hetzner..."
+ssh hetzner "rm -rf $REMOTE_BACKUP_DIR"
+
+echo "Backup process completed successfully!"
 
