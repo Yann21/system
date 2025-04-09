@@ -26,7 +26,6 @@ ckb-next -b &                                       # Corsair bindings
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 
-"$HOME/.pyenv/shims/selfspy" -p "" -d "$HOME" &
 feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
 
 if [[ $(hostname) =~ "yann-laptop" ]]; then
