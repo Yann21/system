@@ -30,6 +30,7 @@ feh --bg-center ~/Documents/Media/wallpapers/drool-l.svg & # Wallpaper
 
 if [[ $(hostname) =~ "yann-laptop" ]]; then
     powerkit &
+    fusuma &
 fi
 
 if [[ $(hostname) =~ "yann-desktop" ]]; then
