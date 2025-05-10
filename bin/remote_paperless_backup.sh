@@ -12,7 +12,7 @@ echo "Starting Paperless NG backup from Hetzner Kubernetes cluster..."
 # Step 1: SSH into Hetzner and execute the backup commands
 ssh hetzner << 'EOF'
     echo "Finding Paperless NG pod..."
-    POD_NAME=$(microk8s kubectl get pod -n default -l app=paperless-ng -o jsonpath="{.items[0].metadata.name}")
+    POD_NAME=$(microk8s kubectl get pod -n default -l app=paperless-ng --field-selector status.phase=Running -o jsonpath="{.items[0].metadata.name}")
     REMOTE_DIR="/data/media/documents/originals"
     BACKUP_DIR="/home/$USER/paperless_backup"
 
