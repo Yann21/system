@@ -4,7 +4,7 @@
 # or $XDG_CONFIG_HOME/autostart/*.desktop
 
 autorandr -c --debug &
-#redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
+redshift -c "$HOME/.config/redshift/redshift.conf" &  # Go easy on the eyes
 autokey-gtk &					    # Autokey
 copyq &                                             # Clipboard manager
 numlockx on &                                       # Numlock (previously in lightdm.conf)
